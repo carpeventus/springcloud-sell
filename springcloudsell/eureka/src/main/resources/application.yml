@@ -1,0 +1,20 @@
+eureka:
+  instance:
+    appname: eureka
+  server:
+    enable-self-preservation: false
+  client:
+    service-url:
+      # 默认就是这个地址
+      defaultZone: http://localhost:8761/eureka/
+    # 是否从eureka服务器获取注册信息
+    fetch-registry: false
+    # 是否注册自身到eureka服务注册中心，设置成false表示只作为服务端
+    register-with-eureka: false
+
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka

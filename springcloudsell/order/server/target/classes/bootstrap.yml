@@ -1,0 +1,61 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+    stream:
+      bindings:
+        messageIn:
+          group: order
+          content-type: application/json
+  zipkin:
+    base-url: http://localhost:9411/
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+    getProductList:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
+#feign:
+#  hystrix:
+#    enabled: true
+#
+#management:
+#  server:
+#    servlet:
+feign:
+  client:
+    config:
+      # 全局
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+      # 指定具体的feign
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+#      context-path: /
